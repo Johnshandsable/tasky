@@ -7,6 +7,19 @@ const pool = require('../modules/pool');
 
 tasksRouter.get('/', (req, res) => {
   console.log('SERVER - GET inside /tasks');
+  let sqlQuery = 'SELECT * FROM "to_do_list"';
+
+  pool
+    .query(sqlQuery)
+    .then((result) => {
+      // SEND BACK TO CLIENT TO DISPLAY TO DOM
+      res.send(result.rows);
+    })
+    .catch((error) => {
+      // ELSE SEND BACK AN ERROR
+      console.log(`SERVER - GET inside /tasks - DB returning`, error);
+      res.sendStatus(500);
+    });
 });
 
 tasksRouter.post('/', (req, res) => {
