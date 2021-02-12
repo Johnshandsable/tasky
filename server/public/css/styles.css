@@ -1,3 +1,18 @@
 body {
-  background-color: blue;
+  background-color: #b2bec3;
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+h1 {
+  margin: 0;
+}
+
+#btnAddTask {
+  border: 2px solid grey;
+  border-radius: 8px;
+  background-color: #74b9ff;
+  font-size: 15px;
+  height: 25px;
+  width: 150px;
 }
