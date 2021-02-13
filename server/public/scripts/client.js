@@ -8,7 +8,7 @@ $(document).ready(function () {
   // POST ROUTE HANDLER
   $(document).on('click', '#btnAddTask', addTask);
   // DELETE ROUTE HANDLER
-  $(document).on('click', '.btnDelete', deleteTaskFromList);
+  $(document).on('click', '.btn-outline-danger', deleteTaskFromList);
   // PUT ROUTE HANDLER incl. toggleClass
   $('tbody').on('click', 'td:first-child', updateTaskAsComplete);
 });
@@ -31,14 +31,14 @@ function getTasks() {
           $('#todoList').append(`
           <tr class="is-completed">
             <td data-id="${item.id}" data-complete="${item.complete}">${item.task}</td>
-            <button class="btnDelete" data-id="${item.id}">DELETE</button>
+            <td><button type="button" data-id="${item.id}" class="">Delete</button></td>
           </tr>
         `);
         } else {
           $('#todoList').append(`
           <tr>
             <td data-id="${item.id}" data-complete="${item.complete}">${item.task}</td>
-            <button class="btnDelete" data-id="${item.id}">DELETE</button>
+            <td><button type="button" data-id="${item.id}" class="btn btn-outline-danger">Delete</button></td>
           </tr>
           `);
         } // end for
@@ -52,10 +52,14 @@ function getTasks() {
 function addTask(event) {
   event.preventDefault();
   console.log('inside addTask() ');
+  console.log('inputting task:', $('input[name="taskToDo"]').val());
 
   $.ajax({
     url: '/tasks',
     method: 'POST',
+    data: {
+      taskToDo: $('input[name="taskToDo"]').val(),
+    },
   })
     .then(function (response) {
       console.log('CLIENT - POST - a response occurred', response);

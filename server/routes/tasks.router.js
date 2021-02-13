@@ -25,9 +25,11 @@ tasksRouter.get('/', (req, res) => {
 
 tasksRouter.post('/', (req, res) => {
   console.log('SERVER - POST inside /tasks');
-  const newTask = req.body;
-  const sqlQuery = `INSERT INTO "to_do_list" ("task", "complete")
-  VALUES ($1, $2)`;
+  const newTask = req.body.taskToDo;
+  const sqlQuery = `INSERT INTO "to_do_list" ("task")
+  VALUES ($1)`;
+
+  console.log('req.body:', req.body);
 
   // If we receive empty values, send back a 400 status
   if (newTask.task == '' || newTask.complete == '') {
@@ -36,7 +38,7 @@ tasksRouter.post('/', (req, res) => {
   }
 
   pool
-    .query(sqlQuery, [newTask.task, newTask.complete])
+    .query(sqlQuery, [newTask])
     .then((result) => {
       res.sendStatus(201);
     })
