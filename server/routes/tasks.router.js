@@ -91,4 +91,20 @@ tasksRouter.delete('/:id', (req, res) => {
     });
 });
 
+tasksRouter.delete('/delete/all', (req, res) => {
+  console.log('SERVER - DELETE inside /tasks/delete-all');
+  const sqlQuery = `DELETE FROM "to_do_list"`;
+
+  pool
+    .query(sqlQuery, [])
+    .then((result) => {
+      console.log('Deleting all items from the to-do list');
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log(`Error deleting an item from the to-do list`, error);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = tasksRouter;
