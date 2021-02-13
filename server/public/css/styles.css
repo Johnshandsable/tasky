@@ -1,3 +1,56 @@
 body {
-  background-color: blue;
+  background-color: #b2bec3;
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+h1 {
+  margin: 0;
+}
+
+table {
+  width: 25%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+thead {
+  text-align: left;
+  color: white;
+}
+
+thead tr {
+  border-width: 2px;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+th:first-child,
+td:first-child {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+
+td {
+  color: #222;
+}
+
+.is-completed td {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.is-completed td:nth-child(2) {
+  text-decoration: line-through;
+}
+
+#btnAddTask {
+  border: 2px solid grey;
+  border-radius: 8px;
+  background-color: #74b9ff;
+  font-size: 15px;
+  height: 25px;
+  width: 150px;
 }
