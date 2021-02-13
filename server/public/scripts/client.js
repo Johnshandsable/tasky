@@ -8,7 +8,7 @@ $(document).ready(function () {
   // POST ROUTE HANDLER
   $(document).on('click', '#btnAddTask', addTask);
   // DELETE ROUTE HANDLER
-  $(document).on('click', '.btn-outline-warning', deleteTaskFromList);
+  $(document).on('click', '.btnDelete', deleteTaskFromList);
   // DELETE ALL ROUTE HANDLER
   $(document).on('click', '#btnDeleteTasks', deleteAllTasksFromList);
   // PUT ROUTE HANDLER incl. toggleClass
@@ -33,12 +33,12 @@ function getTasks() {
           // Add extra class with strike-through effect
           $('#todoList').append(`
             <li class="list-group-item is-completed"><span data-id="${item.id}" data-complete="${item.complete}">${item.task}</span>
-            <button type="button" data-id="${item.id}" class="btn-sm btn-outline-warning">Delete</button></li>
+            <button type="button" data-id="${item.id}" class="btn-sm btn-outline-danger btnDelete">Delete</button></li>
         `);
         } else {
           $('#todoList').append(`
           <li class="list-group-item"><span data-id="${item.id}" data-complete="${item.complete}">${item.task}</span>
-            <button type="button" data-id="${item.id}" class="btn-sm btn-outline-warning">Delete</button></li>
+            <button type="button" data-id="${item.id}" class="btn-sm btn-outline-danger btnDelete">Delete</button></li>
           `);
         } // end for
       } // end then

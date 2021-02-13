@@ -8,7 +8,7 @@ const pool = require('../modules/pool');
 tasksRouter.get('/', (req, res) => {
   console.log('SERVER - GET inside /tasks');
   // TODO: Add a display option that displays uncompleted tasks first
-  const sqlQuery = 'SELECT * FROM "to_do_list"';
+  const sqlQuery = 'SELECT * FROM "to_do_list" ORDER BY "task" DESC';
 
   pool
     .query(sqlQuery)

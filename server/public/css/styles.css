@@ -1,6 +1,11 @@
+html {
+  background-color: #636e72;
+}
+
 body {
-  background-color: #b2bec3;
   font-family: 'Noto Sans', sans-serif;
+  width: 80%;
+  margin: 0 auto;
 }
 
 input {
@@ -27,6 +32,7 @@ span:after {
 span:before {
   left: -2.5px;
 }
+
 span:after {
   right: 2.5px;
   background: #fff;
@@ -34,7 +40,7 @@ span:after {
 }
 
 span:hover:before {
-  background: #fff;
+  background: black;
   width: 100%;
   transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -42,7 +48,7 @@ span:hover:before {
 span:hover:after {
   background: transparent;
   width: 100%;
-  transition: 0s;
+  transition: 0.5s;
 }
 
 ::placeholder {
@@ -53,4 +59,16 @@ span:hover:after {
 
 .is-completed {
   text-decoration: line-through;
+}
+
+.list-group-item {
+  border: none;
+}
+
+.container-fluid {
+  background-color: #a29bfe;
+}
+
+.float {
+  float: right;
 }
