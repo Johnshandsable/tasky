@@ -7,7 +7,8 @@ $(document).ready(function () {
   // EVENT HANDLERS
   // POST ROUTE HANDLER
   $(document).on('click', '#btnAddTask', addTask);
-
+  // DELETE ROUTE HANDLER
+  $(document).on('click', '.btnDelete', deleteTaskFromList);
   // PUT ROUTE HANDLER incl. toggleClass
   $('tbody').on('click', 'td:first-child', updateTaskAsComplete);
 });
@@ -29,13 +30,15 @@ function getTasks() {
         if (item.complete) {
           $('#todoList').append(`
           <tr class="is-completed">
-            <td data-id="${item.id}">${item.task}</td>
+            <td data-id="${item.id}" data-complete="${item.complete}">${item.task}</td>
+            <button class="btnDelete" data-id="${item.id}">DELETE</button>
           </tr>
         `);
         } else {
           $('#todoList').append(`
           <tr>
-            <td data-id="${item.id}">${item.task}</td>
+            <td data-id="${item.id}" data-complete="${item.complete}">${item.task}</td>
+            <button class="btnDelete" data-id="${item.id}">DELETE</button>
           </tr>
           `);
         } // end for
@@ -56,30 +59,48 @@ function addTask(event) {
   })
     .then(function (response) {
       console.log('CLIENT - POST - a response occurred', response);
+      getTasks();
     })
     .catch(function (error) {
       console.log('CLIENT - POST - an error occurred', error);
     });
-}
+} // end addTasks()
 
 function updateTaskAsComplete() {
   console.log('inside updateTaskAsComplete');
-  console.log($(this).data('id'));
+  console.log('id:', $(this).data('id'));
+  console.log('complete:', $(this).data('complete'));
   const todoItemID = $(this).data('id');
+  const todoCompleteStatus = $(this).data('complete');
+
   $(this).parent().toggleClass('is-completed');
 
   $.ajax({
-    url: `/tasks/${todoItemID}`,
+    url: `/tasks/${todoItemID}/${todoCompleteStatus}`,
     method: 'PUT',
   })
     .then(function (response) {
       console.log('CLIENT - PUT - a response occurred', response);
+      getTasks();
     })
     .catch(function (error) {
       console.log('CLIENT - PUT - an error occurred', error);
     });
-}
+} // end updateTasksAsComplete
 
 function deleteTaskFromList() {
   console.log('inside deleteTaskFromList');
-}
+  const todoItemID = $(this).data('id');
+
+  $.ajax({
+    url: `/tasks/${todoItemID}`,
+    method: 'DELETE',
+  })
+    .then(function (response) {
+      console.log('CLIENT - DELETE - a response occurred', response);
+      getTasks();
+    })
+    .catch(function (error) {
+      console.log('CLIENT - DELETE - an error occurred', error);
+    });
+} // end deleteTaskFromList
