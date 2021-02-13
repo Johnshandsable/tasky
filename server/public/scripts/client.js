@@ -26,18 +26,18 @@ function getTasks() {
       console.table('CLIENT - GET - A response occurred', response);
       // RECEIVING A TODO LIST BACK
       for (const item of response) {
-        console.log(item.complete);
+        // console.log(item.complete);
         if (item.complete) {
           $('#todoList').append(`
           <tr class="is-completed">
-            <td data-id="${item.id}" data-complete="${item.complete}">${item.task}</td>
-            <td><button type="button" data-id="${item.id}" class="">Delete</button></td>
+            <td data-id="${item.id}" data-complete="${item.complete}" class="hvr-fade">${item.task}</td>
+            <td><button type="button" data-id="${item.id}" class="btn btn-outline-danger">Delete</button></td>
           </tr>
         `);
         } else {
           $('#todoList').append(`
           <tr>
-            <td data-id="${item.id}" data-complete="${item.complete}">${item.task}</td>
+            <td data-id="${item.id}" data-complete="${item.complete}" class="hvr-fade">${item.task}</td>
             <td><button type="button" data-id="${item.id}" class="btn btn-outline-danger">Delete</button></td>
           </tr>
           `);
