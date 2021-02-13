@@ -26,8 +26,22 @@ tasksRouter.post('/', (req, res) => {
   console.log('SERVER - POST inside /tasks');
 });
 
-tasksRouter.put('/', (req, res) => {
+tasksRouter.put('/:id', (req, res) => {
   console.log('SERVER - PUT inside /tasks');
+  const todoItemId = req.params.id;
+  let sqlQuery = 'UPDATE "to_do_list" SET "complete"=TRUE WHERE "id"=$1';
+
+  pool
+    .query(sqlQuery)
+    .then((result) => {
+      console.log('SERVER - PUT inside /tasks/id. Everything went OK!');
+      res.sendStatus(200); // OK
+    })
+    .catch((error) => {
+      // ELSE SEND BACK AN ERROR
+      console.log(`SERVER - PUT inside /tasks - DB returning`, error);
+      res.sendStatus(500);
+    });
 });
 
 tasksRouter.delete('/', (req, res) => {
