@@ -7,7 +7,7 @@ CREATE TABLE "to_do_list" (
   "task" VARCHAR(1024) NOT NULL,
   "complete" BOOLEAN DEFAULT FALSE
 );
-
+--- For Testing Purposes
 INSERT INTO "to_do_list"
   ("task")
 VALUES
