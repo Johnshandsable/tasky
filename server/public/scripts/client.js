@@ -89,6 +89,12 @@ function addTask(event) {
     })
     .catch(function (error) {
       console.log('CLIENT - POST - an error occurred', error);
+      swal({
+        title: 'Error occurred while adding task',
+        text: 'Make sure the task is not blank',
+        icon: 'warning',
+        buttons: true,
+      });
     });
 } // end addTasks()
 
@@ -135,20 +141,33 @@ function deleteTaskFromList() {
 function deleteAllTasksFromList(event) {
   event.preventDefault();
   console.log('inside deleteAllTasksFromList');
-  /*
-  sweetalert goes here...
-  */
-  $.ajax({
-    url: `/tasks/delete/all`,
-    method: 'DELETE',
-  })
-    .then(function (response) {
-      console.log('CLIENT - DELETE - a response occurred', response);
-      getTasks();
-    })
-    .catch(function (error) {
-      console.log('CLIENT - DELETE - an error occurred', error);
-    });
+
+  swal({
+    title: 'Are you sure?',
+    text: 'Once deleted, you will not be able to recover these tasks',
+    icon: 'warning',
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      $.ajax({
+        url: `/tasks/delete/all`,
+        method: 'DELETE',
+      })
+        .then(function (response) {
+          console.log('CLIENT - DELETE - a response occurred', response);
+          swal('Poof! Your tasks have been deleted', {
+            icon: 'success',
+          });
+          getTasks();
+        })
+        .catch(function (error) {
+          console.log('CLIENT - DELETE - an error occurred', error);
+        });
+    } else {
+      swal('Your to-do-list is safe!');
+    }
+  });
 } // end deleteAllTasksFromList
 
 function clearInputs() {
