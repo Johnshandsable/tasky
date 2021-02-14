@@ -32,10 +32,11 @@
     <title>To-do List</title>
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container">
       <div class="jumbotron">
         <h1 class="display-4">Tasky</h1>
         <p class="lead">Tasky is an ultra awesome to-do-list application.</p>
+        <!-- <img src="./images/blob.svg" alt="A gelatinous blob" /> -->
         <hr class="my-4" />
       </div>
     </div>
@@ -44,8 +45,15 @@
       <div class="row">
         <form>
           <div class="form-group">
-            <label for="taskToDo"></label>
-            <input name="taskToDo" type="text" placeholder="Wash Dishes" />
+            <span class="label label-default">
+              <label for="taskToDo">Task</label>
+            </span>
+            <input
+              name="taskToDo"
+              class="form-control"
+              type="text"
+              placeholder="Wash Dishes"
+            />
             <button id="btnAddTask" class="btn-sm btn-outline-success">
               Add Task
             </button>

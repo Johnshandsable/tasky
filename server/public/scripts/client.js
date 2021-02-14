@@ -2,15 +2,21 @@ console.log('JS loaded');
 
 $(document).ready(function () {
   console.log('jQuery loaded');
+
   // Display to DOM upon loading
   getTasks();
+
   // EVENT HANDLERS
+
   // POST ROUTE HANDLER
   $(document).on('click', '#btnAddTask', addTask);
+
   // DELETE ROUTE HANDLER
   $(document).on('click', '.btnDelete', deleteTaskFromList);
+
   // DELETE ALL ROUTE HANDLER
   $(document).on('click', '#btnDeleteTasks', deleteAllTasksFromList);
+
   // PUT ROUTE HANDLER incl. toggleClass
   $('#todoList').on('click', 'span', updateTaskAsComplete);
 });
@@ -32,13 +38,25 @@ function getTasks() {
           console.log('CLIENT - GET, ', item.complete);
           // Add extra class with strike-through effect
           $('#todoList').append(`
-            <li class="list-group-item is-completed"><span data-id="${item.id}" data-complete="${item.complete}">${item.task}</span>
-            <button type="button" data-id="${item.id}" class="btn-sm btn-outline-danger btnDelete">Delete</button></li>
+            <li class="list-group-item is-completed">
+              <span data-id="${item.id}" data-complete="${item.complete}">
+                ${item.task}
+              </span>
+              <button type="button" data-id="${item.id}" class="btn-sm btn-outline-danger btnDelete">
+                Delete
+              </button>
+            </li>
         `);
         } else {
           $('#todoList').append(`
-          <li class="list-group-item"><span data-id="${item.id}" data-complete="${item.complete}">${item.task}</span>
-            <button type="button" data-id="${item.id}" class="btn-sm btn-outline-danger btnDelete">Delete</button></li>
+          <li class="list-group-item">
+            <span data-id="${item.id}" data-complete="${item.complete}">
+              ${item.task}
+            </span>
+            <button type="button" data-id="${item.id}" class="btn-sm btn-outline-danger btnDelete">
+              Delete
+            </button>
+            </li>
           `);
         } // end for
       } // end then
@@ -54,7 +72,7 @@ function addTask(event) {
   console.log('inputting task:', $('input[name="taskToDo"]').val());
 
   /*
-    Add validation so user cannot submit empty field
+    TODO: Add validation so user cannot submit empty field
   */
 
   $.ajax({
@@ -117,7 +135,9 @@ function deleteTaskFromList() {
 function deleteAllTasksFromList(event) {
   event.preventDefault();
   console.log('inside deleteAllTasksFromList');
-
+  /*
+  sweetalert goes here...
+  */
   $.ajax({
     url: `/tasks/delete/all`,
     method: 'DELETE',

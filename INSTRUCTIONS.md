@@ -46,7 +46,7 @@ For each of your stretch goals, you will be practicing git branching. Please ref
 
 - `feature-styling-bootstrap`
 
-  - [ ] Add Bootstrap to the front end and style it up!
+  - [x] Add Bootstrap to the front end and style it up!
     - Buttons -- make the creation buttons and completion buttons green and the delete red.
     - Inputs -- make your text inputs styled in the bootstrap way
     - Responsive -- make your app responsive to different screen sizes -- check out the [Layout](https://getbootstrap.com/docs/4.1/layout/overview/) section
@@ -54,7 +54,11 @@ For each of your stretch goals, you will be practicing git branching. Please ref
 - `feature-confirm-delete`
 
   - [ ] In whatever fashion you would like, create an 'are you sure: yes / no' option when deleting a task.
+
     - Some styled options are [Bootstrap Modal](https://getbootstrap.com/docs/4.0/components/modal/) or [Sweet Alerts](https://sweetalert.js.org/guides/): Use the CDN option.
+
+    -- npm install sweetalert2
+    -- const Swal = require('sweetalert2')
 
 - `feature-ordering-task-query`
 
