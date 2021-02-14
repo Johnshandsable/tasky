@@ -38,8 +38,8 @@ tasksRouter.post('/', (req, res) => {
 
   console.log('req.body:', req.body);
 
-  // If we receive empty values, send back a 400 status
-  if (newTask.task == '' || newTask.complete == '') {
+  // If we receive undefined values, send back a 400 status
+  if (newTask === undefined || newTask === '') {
     res.sendStatus(400);
     return;
   }

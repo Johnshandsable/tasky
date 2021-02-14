@@ -89,6 +89,12 @@ function addTask(event) {
     })
     .catch(function (error) {
       console.log('CLIENT - POST - an error occurred', error);
+      swal({
+        title: 'Error occurred while adding task',
+        text: 'Make sure the task is not blank',
+        icon: 'warning',
+        buttons: true,
+      });
     });
 } // end addTasks()
 
