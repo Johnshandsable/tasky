@@ -20,13 +20,13 @@ Usage is fairly simple. A user may input a task and then push the enter key or c
 
 ## Built with
 
-HTML/CSS
-[Bootstrap](https://getbootstrap.com/)
-[GetWaves](https://getwaves.io/)
-[Javascript](https://www.javascript.com/)
-[Node.js](https://nodejs.org/en/)
-[Postico](https://eggerapps.at/postico/)
-[Postman](https://www.postman.com/)
+HTML/CSS  
+[Bootstrap](https://getbootstrap.com/)  
+[GetWaves](https://getwaves.io/)  
+[Javascript](https://www.javascript.com/)  
+[Node.js](https://nodejs.org/en/)  
+[Postico](https://eggerapps.at/postico/)  
+[Postman](https://www.postman.com/)  
 [VSCode](https://code.visualstudio.com/)
 
 ## License
