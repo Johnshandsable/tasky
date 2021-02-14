@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Johnshandsable/to-do-list#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "sweetalert2": "^10.14.1"
   }
 }
