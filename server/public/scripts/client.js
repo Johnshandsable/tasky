@@ -2,15 +2,23 @@ console.log('JS loaded');
 
 $(document).ready(function () {
   console.log('jQuery loaded');
+
   // Display to DOM upon loading
   getTasks();
+
   // EVENT HANDLERS
+
   // POST ROUTE HANDLER
   $(document).on('click', '#btnAddTask', addTask);
+
   // DELETE ROUTE HANDLER
-  $(document).on('click', '.btn-outline-danger', deleteTaskFromList);
+  $(document).on('click', '.btnDelete', deleteTaskFromList);
+
+  // DELETE ALL ROUTE HANDLER
+  $(document).on('click', '#btnDeleteTasks', deleteAllTasksFromList);
+
   // PUT ROUTE HANDLER incl. toggleClass
-  $('tbody').on('click', 'td:first-child', updateTaskAsComplete);
+  $('#todoList').on('click', 'span', updateTaskAsComplete);
 });
 
 function getTasks() {
@@ -26,20 +34,29 @@ function getTasks() {
       console.table('CLIENT - GET - A response occurred', response);
       // RECEIVING A TODO LIST BACK
       for (const item of response) {
-        // console.log(item.complete);
-        if (item.complete) {
+        if (item.complete == true) {
+          console.log('CLIENT - GET, ', item.complete);
+          // Add extra class with strike-through effect
           $('#todoList').append(`
-          <tr class="is-completed">
-            <td data-id="${item.id}" data-complete="${item.complete}" class="hvr-fade">${item.task}</td>
-            <td><button type="button" data-id="${item.id}" class="btn btn-outline-danger">Delete</button></td>
-          </tr>
+            <li class="list-group-item is-completed">
+              <span data-id="${item.id}" data-complete="${item.complete}">
+                ${item.task}
+              </span>
+              <button type="button" data-id="${item.id}" class="btn-sm btn-outline-danger btnDelete">
+                Delete
+              </button>
+            </li>
         `);
         } else {
           $('#todoList').append(`
-          <tr>
-            <td data-id="${item.id}" data-complete="${item.complete}" class="hvr-fade">${item.task}</td>
-            <td><button type="button" data-id="${item.id}" class="btn btn-outline-danger">Delete</button></td>
-          </tr>
+          <li class="list-group-item">
+            <span data-id="${item.id}" data-complete="${item.complete}">
+              ${item.task}
+            </span>
+            <button type="button" data-id="${item.id}" class="btn-sm btn-outline-danger btnDelete">
+              Delete
+            </button>
+            </li>
           `);
         } // end for
       } // end then
@@ -54,6 +71,10 @@ function addTask(event) {
   console.log('inside addTask() ');
   console.log('inputting task:', $('input[name="taskToDo"]').val());
 
+  /*
+    TODO: Add validation so user cannot submit empty field
+  */
+
   $.ajax({
     url: '/tasks',
     method: 'POST',
@@ -63,6 +84,7 @@ function addTask(event) {
   })
     .then(function (response) {
       console.log('CLIENT - POST - a response occurred', response);
+      clearInputs();
       getTasks();
     })
     .catch(function (error) {
@@ -77,7 +99,8 @@ function updateTaskAsComplete() {
   const todoItemID = $(this).data('id');
   const todoCompleteStatus = $(this).data('complete');
 
-  $(this).parent().toggleClass('is-completed');
+  console.log($(this));
+  $(this).toggleClass('is-completed');
 
   $.ajax({
     url: `/tasks/${todoItemID}/${todoCompleteStatus}`,
@@ -85,7 +108,7 @@ function updateTaskAsComplete() {
   })
     .then(function (response) {
       console.log('CLIENT - PUT - a response occurred', response);
-      getTasks();
+      // getTasks();
     })
     .catch(function (error) {
       console.log('CLIENT - PUT - an error occurred', error);
@@ -108,3 +131,26 @@ function deleteTaskFromList() {
       console.log('CLIENT - DELETE - an error occurred', error);
     });
 } // end deleteTaskFromList
+
+function deleteAllTasksFromList(event) {
+  event.preventDefault();
+  console.log('inside deleteAllTasksFromList');
+  /*
+  sweetalert goes here...
+  */
+  $.ajax({
+    url: `/tasks/delete/all`,
+    method: 'DELETE',
+  })
+    .then(function (response) {
+      console.log('CLIENT - DELETE - a response occurred', response);
+      getTasks();
+    })
+    .catch(function (error) {
+      console.log('CLIENT - DELETE - an error occurred', error);
+    });
+} // end deleteAllTasksFromList
+
+function clearInputs() {
+  $('input[name="taskToDo"]').val('');
+} // end clearInputs

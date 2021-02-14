@@ -1,28 +1,89 @@
 body {
-  background-color: #b2bec3;
+  background-image: url('./images/wave.svg');
   font-family: 'Noto Sans', sans-serif;
+  margin: 0 auto;
 }
 
-.is-completed td {
-  color: rgba(0, 0, 0, 0.25);
+input {
+  border: 1px solid black;
+}
+
+.list-group-item {
+  width: 25%;
+}
+
+.list-group-item button {
+  float: right;
+}
+
+/* For Strike-through effect on hover */
+span {
+  position: relative;
+  cursor: pointer;
+  margin: 10px;
+}
+
+span:before,
+span:after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  top: 50%;
+  margin-top: -0.5px;
+  background: #fff;
+}
+
+span:before {
+  left: -2.5px;
+}
+
+span:after {
+  right: 2.5px;
+  background: #fff;
+  transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+span:hover:before {
+  background: black;
+  width: 100%;
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+span:hover:after {
+  background: transparent;
+  width: 100%;
+  transition: 0.5s;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: lightgray;
+  opacity: 1; /* Firefox */
+}
+
+.btn-sm {
+  margin: 10px;
+}
+
+.form-control {
+  border: 1px solid black;
+  margin: 10px;
+  width: 25%;
+}
+
+.is-completed {
   text-decoration: line-through;
 }
 
-.hvr-fade {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  overflow: hidden;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: color, background-color;
-  transition-property: color, background-color;
+.list-group-item {
+  border: none;
 }
-.hvr-fade:hover,
-.hvr-fade:focus,
-.hvr-fade:active {
-  background-color: #2098d1;
-  color: white;
+
+.container-fluid {
+  border-color: #fff;
+}
+
+.float {
+  float: right;
 }
