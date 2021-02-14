@@ -6,8 +6,8 @@ This project is a simple to-do-list application with a backend. Not only does it
 
 ## Prerequisites
 
-[Node.js](https://nodejs.org/en/)
-[NPM](https://www.npmjs.com/) or another package manager
+[Node.js](https://nodejs.org/en/)  
+[NPM](https://www.npmjs.com/) or another package manager  
 [Postico](https://eggerapps.at/postico/) or another Database creator
 
 ## Installation
